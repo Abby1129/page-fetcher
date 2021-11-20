@@ -10,9 +10,10 @@ request(url, (err, res, body) => {
     console.log("file exists...removing");
     fs.unlinkSync(path); //remove the file
   } else {
+    res.setEncoding("utf8"); //set the encoding to utf8 so that we can read the file as a string
     // if the file does not exist then write the data to the file path specified by the user
     fs.writeFile(path, body, (err) => {
-      // write the file to the path with the body of the response as the data to write to the file
+      //write the data to the file path specified by the user and callback function to check for errors if any occur
       if (err) {
         console.log(err); //if there is an error, log it to the console
       } else {
